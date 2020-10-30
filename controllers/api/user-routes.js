@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Vote } = require('../../models');
+const { User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /api/users
@@ -35,12 +35,6 @@ router.get('/:id', (req, res) => {
                     model: Post,
                     attributes: ['title']
                 }
-            },
-            {
-                model: Post,
-                attributes: ['title'],
-                through: Vote,
-                as: 'voted_posts'
             }
         ]
     })
@@ -58,7 +52,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
@@ -76,7 +70,7 @@ router.post('/', withAuth, (req, res) => {
         });
 });
 
-router.post('/login', withAuth, (req, res) => {
+router.post('/login', (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     User.findOne({
         where: {
@@ -110,7 +104,6 @@ router.post('/login', withAuth, (req, res) => {
 
 // PUT /api/users/1
 router.put('/:id', withAuth, (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
