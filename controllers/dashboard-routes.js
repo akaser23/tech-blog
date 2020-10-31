@@ -67,24 +67,24 @@ router.get('/edit/:id', withAuth, (req, res) => {
             }
         ]
     })
-    .then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-        }
+        .then(dbPostData => {
+            if (!dbPostData) {
+                // serialize the data
+                const post = dbPostData.get({ plain: true });
 
-        // serialize the data
-        const post = dbPostData.get({ plain: true });
-
-        require.render('edit-post', {
-            post,
-            loggedIn: req.session.loggedIn
+                require.render('edit-post', {
+                    post,
+                    loggedIn: req.session.loggedIn
+                });
+            }else{
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
         });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
 });
 
 module.exports = router;
