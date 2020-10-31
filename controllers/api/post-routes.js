@@ -78,13 +78,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/', withAuth, (req, res) => {
     // expects {title: 'Taskmaster goes public!', post_contents: 'https://taskmaster.com/press', user_id: 1}
+    console.log(req.body)
     Post.create({
         title: req.body.title,
         post_contents: req.body.post_contents,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
 
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => res.json(dbPostData)) 
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
