@@ -71,17 +71,17 @@ router.get('/edit/:id', withAuth, (req, res) => {
     })
         .then(dbPostData => {
             if (!dbPostData) {
-                // serialize the data
-                const post = dbPostData.get({ plain: true });
-
-                require.render('edit-post', {
-                    post,
-                    loggedIn: req.session.loggedIn
-                });
-            }else{
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
+            
+            // serialize the data
+            const post = dbPostData.get({ plain: true });
+
+            require.render('edit-post', {
+                post,
+                loggedIn: req.session.loggedIn
+            });
         })
         .catch(err => {
             console.log(err);

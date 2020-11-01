@@ -18,7 +18,7 @@ a {
 }
 
 a:hover {
-    color: red;
+    color: rgb(68, 116, 124);
 }
 
 button {
@@ -117,7 +117,7 @@ main {
 
 .btn-no-style:hover {
     background: none;
-    color: gray;
+    color: rgb(139, 70, 70);
 }
 
 .delete-post-btn {
@@ -137,6 +137,7 @@ main {
     font-style: italic;
     font-size: 90%;
     color: #7d7d7d;
+    display: block;
 }
   
 .edit-link {
