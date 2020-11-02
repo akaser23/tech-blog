@@ -136,7 +136,7 @@ main {
 .post .title span {
     font-style: italic;
     font-size: 90%;
-    color: #7d7d7d;
+    color: white;
     display: block;
 }
   
@@ -152,10 +152,12 @@ main {
 .comment {
     padding: 1%;
     margin-bottom: 1%;
+    color: white;
+    background-color: black;
 }
   
 .comment:nth-child(odd) {
-    background-color: #fff5eb;
+    background-color: black;
 }
   
 .comment .meta {
